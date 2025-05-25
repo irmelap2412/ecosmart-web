@@ -1,10 +1,9 @@
 [
   {
-    "id": 0,
     "productName": "LED Light Bulbs (Pack of 4)",
-    "image": "images/led-bulbs.jpg",
+    "imageURL":"public/images/led-bulbs.jpg",
     "from": "Smart Energy Solutions",
-    "nutrients": "Uses 75% less energy than traditional incandescent bulbs",
+    "specifications": "Uses 75% less energy than traditional incandescent bulbs",
     "quantity": "4 bulbs per pack",
     "price": 12.99,
     "energySavings": "75%",
@@ -12,11 +11,10 @@
     "eco": true
   },
   {
-    "id": 1,
     "productName": "Smart Thermostat",
-    "image": "images/smart-thermostat.jpg",
+    "imageURL":"public/images/smart-thermostat.jpg",
     "from": "EcoControl",
-    "nutrients": "Reduces heating and cooling costs by up to 23% annually",
+    "specifications": "Reduces heating and cooling costs by up to 23% annually",
     "quantity": "1 unit",
     "price": 199.99,
     "energySavings": "23%",
@@ -24,11 +22,10 @@
     "eco": true
   },
   {
-    "id": 2,
     "productName": "Energy Efficient Refrigerator",
-    "image": "images/eco-fridge.jpg",
+    "imageURL":"public/images/eco-fridge.jpg",
     "from": "GreenAppliances",
-    "nutrients": "ENERGY STAR certified, uses 40% less energy than standard models",
+    "specifications": "ENERGY STAR certified, uses 40% less energy than standard models",
     "quantity": "1 unit",
     "price": 899.99,
     "energySavings": "40%",
@@ -36,11 +33,10 @@
     "eco": true
   },
   {
-    "id": 3,
     "productName": "Solar Power Bank",
-    "image": "images/solar-power-bank.jpg",
+    "imageURL":"public/images/solar-power-bank.jpg",
     "from": "SunCharge",
-    "nutrients": "Renewable charging for devices using solar energy",
+    "specifications": "Renewable charging for devices using solar energy",
     "quantity": "10,000mAh capacity",
     "price": 49.99,
     "energySavings": "100%",
@@ -48,11 +44,10 @@
     "eco": true
   },
   {
-    "id": 4,
     "productName": "Low-Flow Shower Head",
-    "image": "images/low-flow-shower.jpg",
+    "imageURL": "public/images/low-flow-shower.jpg",
     "from": "WaterWise",
-    "nutrients": "Reduces water usage by up to 50% while maintaining pressure",
+    "specifications": "Reduces water usage by up to 50% while maintaining pressure",
     "quantity": "1 unit",
     "price": 34.99,
     "energySavings": "50%",
@@ -60,39 +55,14 @@
     "eco": true
   },
   {
-    "id": 5,
     "productName": "Energy Monitor System",
-    "image": "images/energy-monitor.jpg",
+    "imageURL": "public/images/energy-monitor.jpg",
     "from": "PowerTrack",
-    "nutrients": "Helps identify energy waste and optimize usage",
+    "specifications": "Helps identify energy waste and optimize usage",
     "quantity": "1 system with 6 sensors",
     "price": 129.99,
     "energySavings": "15-20%",
     "description": "This comprehensive energy monitoring system helps you track electricity usage throughout your home. Real-time data shows which appliances and systems are consuming the most power, allowing you to make informed decisions about energy use. The smartphone app provides usage reports and customized recommendations for savings.",
-    "eco": true
-  },
-  {
-    "id": 6,
-    "productName": "Portable Space Heater",
-    "image": "images/space-heater.jpg",
-    "from": "WarmTech",
-    "nutrients": "Zone heating saves energy by warming only occupied rooms",
-    "quantity": "1 unit",
-    "price": 79.99,
-    "energySavings": "10-15%",
-    "description": "This energy-efficient space heater allows you to heat only the rooms you're using instead of the entire house. Features include multiple heat settings, a programmable thermostat, and safety features like tip-over protection and overheat shutdown. The ceramic heating element provides fast, efficient warmth.",
-    "eco": false
-  },
-  {
-    "id": 7,
-    "productName": "Window Insulation Kit",
-    "image": "images/window-insulation.jpg",
-    "from": "DraftBlock",
-    "nutrients": "Reduces heat loss through windows by up to 70%",
-    "quantity": "Kit for 5 windows",
-    "price": 19.99,
-    "energySavings": "70%",
-    "description": "This window insulation kit helps prevent heat loss during winter and keeps cool air in during summer. The clear film is nearly invisible once installed and doesn't affect the appearance of your windows. Installation is simple with the included double-sided tape and can be removed without damage when no longer needed.",
     "eco": true
   }
 ]

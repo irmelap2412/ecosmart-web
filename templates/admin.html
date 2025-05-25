@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <title>Admin — 🌱 EcoSmart</title>
+
+    <style>
+      :root {
+        --primary: #10b981;
+        --primary-dark: #059669;
+        --secondary: #0ea5e9;
+        --text: #1e293b;
+        --text-light: #64748b;
+        --background: #f8fafc;
+        --card-bg: #ffffff;
+        --border: #e2e8f0;
+        --danger: #ef4444;
+        --success: #22c55e;
+        --radius: 12px;
+        --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+        --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+          0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+          0 4px 6px -2px rgba(0, 0, 0, 0.05);
+      }
+
+      *,
+      *::before,
+      *::after {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html {
+        font-size: 62.5%;
+      }
+
+      body {
+        font-family: "Inter", sans-serif;
+        font-size: 1.6rem;
+        line-height: 1.5;
+        color: var(--text);
+        background-color: var(--background);
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+
+      .container {
+        max-width: 120rem;
+        margin: 0 auto;
+        padding: 0 2rem;
+      }
+
+      .header {
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        color: white;
+        padding: 2rem 0;
+      }
+
+      .header__content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .header__logo {
+        font-size: 2.4rem;
+        font-weight: 700;
+        text-decoration: none;
+        color: white;
+      }
+
+      .header__back {
+        display: inline-flex;
+        align-items: center;
+        color: white;
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 1.6rem;
+        transition: opacity 0.2s ease;
+      }
+
+      .header__back:hover {
+        opacity: 0.9;
+      }
+
+      .header__back-icon {
+        margin-right: 0.8rem;
+      }
+
+      .admin-panel {
+        margin: 4rem auto;
+        max-width: 80rem;
+        background: var(--card-bg);
+        border-radius: var(--radius);
+        overflow: hidden;
+        box-shadow: var(--shadow);
+      }
+
+      .admin-panel__header {
+        background: var(--primary);
+        color: white;
+        padding: 2rem;
+      }
+
+      .admin-panel__title {
+        font-size: 2.4rem;
+        font-weight: 600;
+      }
+
+      .admin-panel__content {
+        padding: 3rem;
+      }
+
+      .form-group {
+        margin-bottom: 2rem;
+      }
+
+      .form-label {
+        display: block;
+        font-size: 1.6rem;
+        font-weight: 500;
+        margin-bottom: 0.8rem;
+        color: var(--text);
+      }
+
+      .form-input,
+      .form-textarea,
+      .form-select {
+        display: block;
+        width: 100%;
+        padding: 1.2rem;
+        font-size: 1.6rem;
+        font-family: "Inter", sans-serif;
+        color: var(--text);
+        background-color: var(--background);
+        border: 1px solid var(--border);
+        border-radius: 0.6rem;
+        transition: border-color 0.2s ease;
+      }
+
+      .form-input:focus,
+      .form-textarea:focus,
+      .form-select:focus {
+        outline: none;
+        border-color: var(--primary);
+        box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+      }
+
+      .form-textarea {
+        min-height: 12rem;
+        resize: vertical;
+      }
+
+      .form-checkbox-group {
+        display: flex;
+        align-items: center;
+      }
+
+      .form-checkbox {
+        margin-right: 1rem;
+        width: 1.8rem;
+        height: 1.8rem;
+      }
+
+      .form-submit {
+        display: inline-block;
+        background-color: var(--primary);
+        color: white;
+        font-size: 1.6rem;
+        font-weight: 600;
+        padding: 1.2rem 2.4rem;
+        border-radius: 0.8rem;
+        border: none;
+        cursor: pointer;
+        transition: background-color 0.2s ease;
+      }
+
+      .form-submit:hover {
+        background-color: var(--primary-dark);
+      }
+
+      .form-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+      }
+
+      @media (max-width: 768px) {
+        .form-row {
+          grid-template-columns: 1fr;
+          gap: 0;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <header class="header">
+      <div class="container">
+        <div class="header__content">
+          <a href="/" class="header__logo">🌱 EcoSmart</a>
+          <a href="/" class="header__back">
+            <span class="header__back-icon">←</span> Back to Products
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <main class="container">
+      <div class="admin-panel">
+        <div class="admin-panel__header">
+          <h1 class="admin-panel__title">Add New Product</h1>
+        </div>
+        <div class="admin-panel__content">
+          <form
+            action="/api/products"
+            method="POST"
+            enctype="multipart/form-data"
+          >
+            <div class="form-group">
+              <label for="productName" class="form-label">Product Name</label>
+              <input
+                type="text"
+                id="productName"
+                name="productName"
+                class="form-input"
+                required
+              />
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="from" class="form-label"
+                  >Company/Manufacturer</label
+                >
+                <input
+                  type="text"
+                  id="from"
+                  name="from"
+                  class="form-input"
+                  required
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="price" class="form-label">Price ($)</label>
+                <input
+                  type="number"
+                  id="price"
+                  name="price"
+                  step="0.01"
+                  min="0"
+                  class="form-input"
+                  required
+                />
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="energySavings" class="form-label"
+                  >Energy Savings (%)</label
+                >
+                <input
+                  type="text"
+                  id="energySavings"
+                  name="energySavings"
+                  class="form-input"
+                  required
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="quantity" class="form-label">Quantity/Unit</label>
+                <input
+                  type="text"
+                  id="quantity"
+                  name="quantity"
+                  class="form-input"
+                  required
+                />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="specifications" class="form-label"
+                >Energy Efficiency Details</label
+              >
+              <input
+                type="text"
+                id="specifications"
+                name="specifications"
+                class="form-input"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="description" class="form-label"
+                >Product Description</label
+              >
+              <textarea
+                id="description"
+                name="description"
+                class="form-textarea"
+                required
+              ></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="image" class="form-label">Product Image</label>
+              <input
+                type="file"
+                id="image"
+                name="image"
+                class="form-input"
+                accept="image/*"
+              />
+            </div>
+
+            <div class="form-group">
+              <div class="form-checkbox-group">
+                <input
+                  type="checkbox"
+                  id="eco"
+                  name="eco"
+                  value="true"
+                  class="form-checkbox"
+                  checked
+                />
+                <label for="eco" class="form-label" style="margin-bottom: 0"
+                  >Eco-Friendly Product</label
+                >
+              </div>
+            </div>
+
+            <div class="form-group">
+              <button type="submit" class="form-submit">Add Product</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>
