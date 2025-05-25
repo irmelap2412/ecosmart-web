@@ -8,7 +8,7 @@ A simple Node.js application that displays information about energy-efficient pr
 2. Hit npm install
 3. Seed the database: node scripts/seed-db.js
 3. Run the server: node server.js
-4.. Open your browser and go to http://localhost:8000
+4. Open your browser and go to http://localhost:8000
 
 ## Project Structure
 
@@ -25,4 +25,6 @@ A simple Node.js application that displays information about energy-efficient pr
 - Overview page with all energy-efficient products
 - Detailed product pages
 - Simple API endpoint at /api
-- DB integration
+- MySQL connection
+- Admin panel to add products
+
