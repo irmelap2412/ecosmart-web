@@ -2,8 +2,10 @@ import mysql from "mysql2/promise"
 import fs from "fs"
 import path from "path"
 import { fileURLToPath } from "url"
+import dotenv from "dotenv"
 
-// Get the directory name of the current module
+dotenv.config()
+
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
@@ -11,72 +13,85 @@ async function seedDatabase() {
   let connection
 
   try {
-    // Connect to MySQL
-    connection = await mysql.createConnection(process.env.DATABASE_URL)
+    // Connect to database
+    connection = await mysql.createConnection({
+      host: process.env.DB_HOST,
+      user: process.env.DB_USER,
+      password: process.env.DB_PASSWORD,
+      database: process.env.DB_NAME,
+    })
     console.log("Connected to MySQL database")
 
-    // Create products table if it doesn't exist
+    // Create products table
     await connection.execute(`
       CREATE TABLE IF NOT EXISTS products (
         id INT AUTO_INCREMENT PRIMARY KEY,
         productName VARCHAR(255) NOT NULL,
+        imageURL VARCHAR(500) DEFAULT NULL,
         \`from\` VARCHAR(255) NOT NULL,
-        nutrients TEXT NOT NULL,
+        specifications TEXT DEFAULT NULL,
         quantity VARCHAR(255) NOT NULL,
         price DECIMAL(10, 2) NOT NULL,
         energySavings VARCHAR(50) NOT NULL,
         description TEXT NOT NULL,
         eco BOOLEAN DEFAULT TRUE,
-        image VARCHAR(500) DEFAULT NULL,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
       )
     `)
+    console.log("Products table ready")
 
     // Check if table has data
     const [rows] = await connection.execute("SELECT COUNT(*) as count FROM products")
     const count = rows[0].count
 
     if (count === 0) {
-      console.log("Seeding database with sample data...")
+      // Read data.json file
+      const dataPath = path.join(__dirname, "..", "data.json")
 
-      // Read sample data from JSON file
-      const sampleDataPath = path.join(__dirname, "..", "data.json")
-      const sampleData = JSON.parse(fs.readFileSync(sampleDataPath, "utf-8"))
-
-      // Insert sample data
-      for (const product of sampleData) {
-        await connection.execute(
-          `
-          INSERT INTO products (productName, \`from\`, nutrients, quantity, price, energySavings, description, eco, image)
-          VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
-        `,
-          [
-            product.productName,
-            product.from,
-            product.nutrients,
-            product.quantity,
-            product.price,
-            product.energySavings,
-            product.description,
-            product.eco,
-            product.image,
-          ],
-        )
+      if (!fs.existsSync(dataPath)) {
+        throw new Error("data.json file not found in project root")
       }
 
-      console.log(`${sampleData.length} products inserted successfully`)
+      const data = JSON.parse(fs.readFileSync(dataPath, "utf-8"))
+
+      if (!Array.isArray(data)) {
+        throw new Error("data.json should contain an array of products")
+      }
+
+      // Insert products
+      let inserted = 0
+      for (const product of data) {
+        await connection.execute(
+          `INSERT INTO products (productName, imageURL, \`from\`, specifications, quantity, price, energySavings, description, eco)
+           VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+          [
+            product.productName,
+            product.imageURL || product.image || null,
+            product.from,
+            product.specifications || product.nutrients || null,
+            product.quantity,
+            Number.parseFloat(product.price),
+            product.energySavings,
+            product.description,
+            product.eco !== undefined ? product.eco : true,
+          ],
+        )
+        inserted++
+        console.log(`Added: ${product.productName}`)
+      }
+
+      console.log(`${inserted} products inserted`)
     } else {
-      console.log(`Database already contains ${count} products. Skipping seed.`)
+      console.log(`Database already has ${count} products`)
     }
   } catch (error) {
-    console.error("Error seeding database:", error)
+    console.error("Error:", error.message)
+    process.exit(1)
   } finally {
     if (connection) {
       await connection.end()
-      console.log("MySQL connection closed")
     }
   }
 }
 
-// Run the seed function
-seedDatabase().catch(console.error)
+seedDatabase()

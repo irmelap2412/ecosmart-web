@@ -3,10 +3,16 @@
   "type": "module",
   "version": "1.0.0",
   "description": "A simple Node.js application that displays information about energy-efficient products.",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "db:seed": "node scripts/seed-db.js",
+    "db:reset": "node scripts/seed-db.js --reset",
+    "setup": "npm run db:seed && echo 'Setup complete! Run npm start to begin.'",
+    "test": "echo 'No tests specified yet'",
+    "prestart": "echo 'Starting server...'",
+    "postinstall": "echo 'Dependencies installed. Run npm run setup to initialize database.'"
   },
   "author": "",
   "license": "ISC",
